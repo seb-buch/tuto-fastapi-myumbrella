@@ -1,0 +1,57 @@
+[tool.poetry]
+name = "myumbrella"
+version = "1.0.0"
+description = ""
+authors = ["Sébastien Buchoux <sebastien.buchoux@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "myumbrella", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+httpx = "^0.23.3"
+fastapi = "^0.91.0"
+uvicorn = { extras = ["standard"], version = "^0.20.0" }
+
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.0.0"
+black = "^23.1.0"
+pylint = "^2.16.1"
+flake8 = "^6.0.0"
+bandit = "^1.7.4"
+vulture = "^2.7"
+pytest = "^7.2.1"
+pytest-cov = "^4.0.0"
+pycodestyle = "^2.10.0"
+pydocstyle = "^6.3.0"
+isort = "^5.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+
+[tool.isort]
+profile = "black"
+src_paths = ["src", "tests"]
+
+[tool.pytest.ini_options]
+addopts = "-vx --cov=src --cov-report xml --cov-report term --cov-report html --junitxml=report.xml"
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_any_unimported = false
+warn_return_any = true
+warn_unused_ignores = true
+no_implicit_optional = true
+show_error_codes = true
+
+[tool.pylint.'MESSAGES CONTROL']
+extension-pkg-whitelist = "pydantic"
+
+[tool.vulture]
+ignore_decorators = ["@app.route", "@router.get"]

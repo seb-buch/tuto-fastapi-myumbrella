@@ -1,0 +1,90 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/docker-existing-docker-compose
+// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
+{
+    "name": "Umbrella-App",
+    "userEnvProbe": "loginInteractiveShell",
+    // Update the 'dockerComposeFile' list if you have more compose files or use different names.
+    // The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+    "build": {
+        "dockerfile": "devcontainer.dockerfile"
+    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    // The optional 'workspaceFolder' property is the path VS Code should open by default when
+    // connected. This is typically a file mount in .devcontainer/docker-compose.yml
+    "workspaceFolder": "/workspace",
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [
+    // 	8001,
+    // 	8001
+    // ],
+    // Uncomment the next line if you want start specific services in your Docker Compose config.
+    // "runServices": [],
+    // Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+    // "shutdownAction": "none",
+    // Uncomment the next line to run commands after the container is created - for example installing curl.
+    // "postCreateCommand": "apt-get update && apt-get install -y curl",
+    // Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
+    "remoteUser": "vscode",
+    "customizations": {
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                "yaml.schemas": {
+                    "https://raw.githubusercontent.com/ansible/schemas/main/f/ansible.json#/$defs/playbook": "file:///workspace/ansible/deploy.yml"
+                },
+                "python.defaultInterpreterPath": "/workspace/.venv/bin/python",
+                "python.formatting.provider": "black",
+                "python.linting.prospectorEnabled": false,
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": true,
+                "python.formatting.autopep8Path": "/workspace/.venv/bin/autopep8",
+                "python.formatting.blackPath": "/workspace/.venv/bin/black",
+                "python.linting.banditPath": "/workspace/.venv/bin/bandit",
+                "python.linting.banditArgs": [
+                    "-c pyproject.toml"
+                ],
+                "python.linting.banditEnabled": true,
+                "python.linting.flake8Path": "/workspace/.venv/bin/flake8",
+                "python.linting.flake8Enabled": true,
+                "python.linting.mypyPath": "/workspace/.venv/bin/mypy",
+                "python.linting.mypyEnabled": true,
+                "python.linting.pycodestylePath": "/workspace/.venv/bin/pycodestyle",
+                "python.linting.pycodestyleEnabled": true,
+                "python.linting.pydocstylePath": "/workspace/.venv/bin/pydocstyle",
+                "python.linting.pydocstyleEnabled": true,
+                "python.linting.pylintPath": "/workspace/.venv/bin/pylint",
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "editor.formatOnSave": true,
+                "conventionalCommits.emojiFormat": "emoji",
+                "conventionalCommits.promptScopes": false,
+                "conventionalCommits.promptBody": false,
+                "conventionalCommits.promptFooter": false,
+                "gitlens.showWelcomeOnInstall": false,
+                "gitlens.showWhatsNewAfterUpgrades": false,
+                "gitlens.plusFeatures.enabled": false,
+                "gitlens.virtualRepositories.enabled": false,
+                "gitlens.currentLine.pullRequests.enabled": false,
+                "[python]": {
+                    "editor.formatOnSave": true
+                },
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": true
+                },
+                "python.testing.pytestArgs": [
+                    "tests"
+                ],
+                "python.testing.unittestEnabled": false,
+                "python.testing.pytestEnabled": true
+            },
+            "extensions": [
+                "ms-python.vscode-pylance",
+                "bierner.markdown-preview-github-styles",
+RUN                 "yzhang.markdown-all-in-one",
+                "njpwerner.autodocstring",
+                "tamasfe.even-better-toml",
+                "redhat.vscode-yaml"
+            ]
+        }
+    }
+}

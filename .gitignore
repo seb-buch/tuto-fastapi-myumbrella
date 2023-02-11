@@ -1,0 +1,13 @@
+.secrets/
+secrets/
+dist
+experimental/
+.env
+.venv
+.pytest*
+.coverage
+.mypy_cache
+__pycache__
+coverage.xml
+htmlcov/
+report.xml
